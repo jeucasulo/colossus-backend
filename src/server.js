@@ -22,11 +22,12 @@ require('./routes/routes')(app); // <--- basta adicionar essa linha
 // Colossus\backend\src\routes\routes.js
 
 const hostname = '127.0.0.1';
+// const port = 3333;
 const port = 3333;
 
 app.use(cors());
 app.use(express.json());
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
