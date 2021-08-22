@@ -1,3 +1,38 @@
+require('dotenv').config()
+
+const braintree = require("braintree");
+
+const gateway = new braintree.BraintreeGateway({
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET
+});
+
+
+exports.getConnectUrl = (req, res, next) => {
+
+  const url = gateway.oauth.connectUrl({
+    redirectUri: "https://www.example.com/",
+    scope: "shared_vault_transactions,transaction:manage_settlement",
+  });
+  // console.log(url);
+  res.json({ url: url });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.post = (req, res, next) => {
   res.status(201).send('Rota POST!');
 };
