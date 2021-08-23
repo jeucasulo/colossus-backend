@@ -26,7 +26,7 @@ exports.getConnectUrl = (req, res, next) => {
     scope: "shared_vault_transactions,transaction:manage_settlement",
   });
   // console.log(url);
-  res.json({ url: url });
+  res.json({ msg: url });
 };
 
 
@@ -60,12 +60,14 @@ exports.getCode = (req, res, next) => {
       });
 
       console.log(result);
+      res.json({ msg: result });
 
       client.close();
     });
   })();
 
-  res.json({ code: code });
+
+
 };
 
 
@@ -139,7 +141,7 @@ exports.getCodeFromDb = async (req, res, next) => {
 
     client.close();
 
-    res.json({ url: result });
+    res.json({ msg: result });
 
   });
 
@@ -176,7 +178,7 @@ exports.getAccessToken = (req, res, next) => {
     // const refreshToken = response.credentials.refreshToken;
 
     console.log(response);
-    res.json({ url: response });
+    res.json({ msg: response });
 
     // console.log(accessToken);
     // console.log(refreshToken);
