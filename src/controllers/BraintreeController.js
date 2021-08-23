@@ -78,6 +78,7 @@ exports.getCodeFromDb = async (req, res, next) => {
   mongoConnect();
 
   await client.connect(async err => {
+
     const collection = client.db("colossus").collection("accessToken"); // db and table
 
     const query = { type: "accessToken" };
@@ -94,7 +95,8 @@ exports.getCodeFromDb = async (req, res, next) => {
 
     const estimate = await collection.estimatedDocumentCount();
     // console.log(`Estimated number of documents in the collection: ${estimate}`);
-    console.log(`Count: ${estimate}`);
+    // console.log(`Count: ${estimate}`);
+    console.log("Count: " + estimate);
 
 
 
@@ -174,12 +176,13 @@ exports.getAccessToken = (req, res, next) => {
     // const refreshToken = response.credentials.refreshToken;
 
     console.log(response);
+    res.json({ url: response });
+
     // console.log(accessToken);
     // console.log(refreshToken);
   });
 
 
-  res.json({ url: 'getAccessToken' });
 
   // {
   //   credentials: OAuthCredentials {
