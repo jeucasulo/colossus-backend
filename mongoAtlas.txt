@@ -1,0 +1,18 @@
+username
+colossus
+senha
+F-Jrm5Z78#hWEQY
+
+
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://<username>:<password>@cluster0.rzkfk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
+
+https://www.youtube.com/watch?v=dbSXC7kdUmc
