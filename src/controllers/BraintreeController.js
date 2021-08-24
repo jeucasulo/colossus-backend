@@ -22,7 +22,8 @@ const gateway = new braintree.BraintreeGateway({
 exports.getConnectUrl = (req, res, next) => {
 
   const url = gateway.oauth.connectUrl({
-    redirectUri: "https://www.example.com/",
+    // redirectUri: "https://www.example.com/",
+    redirectUri: "https://colossus-backend.herokuapp.com/get-code",
     scope: "shared_vault_transactions,transaction:manage_settlement",
   });
   // console.log(url);
@@ -40,7 +41,7 @@ exports.getConnectUrl = (req, res, next) => {
 
 
 exports.getCode = (req, res, next) => {
-  var code = req.query.code; // $_GET["id"]
+  var code = req.query.code; // $_GET["code"]
   console.log('code');
   console.log(code);
 
@@ -163,8 +164,11 @@ exports.getCodeFromDb = async (req, res, next) => {
 
 
 exports.getAccessToken = (req, res, next) => {
+  var codeFromQueryString = req.query.codeFromQueryString; // $_GET["code"]
 
-  const codeFromQueryString = "14c0c1aa50aa12841921e462858d6793"
+
+  // const codeFromQueryString = "14c0c1aa50aa12841921e462858d6793"
+  // const codeFromQueryString = "5f1bce31ac1c429db1231e5c6894a794"
 
   // https://www.example.com/?state=&merchantId=kq7t3257dqmnpjrz&code=02fe27b31cfaafa68c4253caabd95e93
   // https://www.example.com/?state=&merchantId=kq7t3257dqmnpjrz&code=14c0c1aa50aa12841921e462858d6793
