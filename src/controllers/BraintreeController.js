@@ -182,6 +182,7 @@ exports.getAccessToken = (req, res, next) => {
     // const refreshToken = response.credentials.refreshToken;
 
     console.log(response);
+    console.log(response.data.msg.credentials);
     res.json({ msg: response });
 
     // console.log(accessToken);
@@ -200,6 +201,55 @@ exports.getAccessToken = (req, res, next) => {
   //   },
   //   success: true
   // }
+
+
+
+};
+
+
+
+
+
+
+exports.transaction = (req, res, next) => {
+  var amount = req.query.amount; // $_GET["amount"]
+  var orderId = req.query.orderid; // $_GET["orderid"]
+  var useAccessTokenForMerchant = req.query.useAccessTokenForMerchant;
+
+  // const useAccessTokenForMerchant = "access_token$sandbox$v3g2gbbb6n3f26yj$0ea8236cb67585cbf38987595f652468"
+
+  const gateway = new braintree.BraintreeGateway({
+    accessToken: useAccessTokenForMerchant
+  });
+
+  // gateway.transaction.sale({
+  //   amount: "12.00",
+  //   sharedPaymentMethodToken: "ksdy69g",
+  //   merchantAccountId: "BRL_Maid",
+  //   options: {
+  //     submitForSettlement: true
+  //   }
+  // }, (err, result) => {
+  //   console.log(err);
+  //   console.log(result);
+  // });
+
+
+  gateway.transaction.sale({
+    amount: amount,
+    orderId: orderId,
+    sharedPaymentMethodToken: "ksdy69g",
+    merchantAccountId: "BRL_Maid",
+    options: {
+      submitForSettlement: true
+    }
+  }, (err, result) => {
+    // console.log(err);
+    console.log(err);
+
+    res.json({ msg: result });
+
+  });
 };
 
 

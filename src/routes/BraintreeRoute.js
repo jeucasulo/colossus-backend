@@ -9,6 +9,7 @@ module.exports = (app) => {
   app.get('/get-access-token', (BraintreeController.getAccessToken));
   app.get('/get-code', (BraintreeController.getCode));
   app.get('/get-code-from-db', (BraintreeController.getCodeFromDb));
+  app.get('/transaction', (BraintreeController.transaction));
 
 
   app.post('/usuario', BraintreeController.post);
